@@ -17909,6 +17909,16 @@ __webpack_require__.r(__webpack_exports__);
   components: {
     AppLayout: _Layouts_AppLayout__WEBPACK_IMPORTED_MODULE_0__.default,
     Welcome: _Jetstream_Welcome__WEBPACK_IMPORTED_MODULE_1__.default
+  },
+  data: function data() {
+    return {
+      users: []
+    };
+  },
+  mounted: function mounted() {
+    axios.get('api/users').then(function (response) {
+      console.log(response);
+    });
   }
 });
 
