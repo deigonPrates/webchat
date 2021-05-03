@@ -20,7 +20,6 @@
                             </li>
                         </ul>
                     </div>
-
                     <div class="w-9/12 flex flex-col justify-between">
                         <div class="w-full p-6 flex flex-col overflow-y-scroll">
                             <div class="w-full mb-3 text-right">
