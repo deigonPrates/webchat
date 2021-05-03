@@ -25,13 +25,15 @@
                     <div class="w-9/12 flex flex-col justify-between">
                         <div class="w-full p-6 flex flex-col overflow-y-scroll">
                             <div v-for="message in messages" :key="messages.id"
-                                :class="(message.from == $attrs.user.id) ? 'text-right' : ''"
+                                :class="(message.from === $attrs.user.id) ? 'text-right' : ''"
                                 class="w-full mb-3">
-                                <p :class="(message.from == $attrs.user.id) ? 'messageFromMe' : 'messageToMe'"
+                                <p :class="(message.from === $attrs.user.id) ? 'messageFromMe' : 'messageToMe'"
                                     class="inline-block p-2 rounded-md" style="max-width: 75%">
                                     {{ message.content }}
                                 </p>
-                                <span class="block mt-1 text-sm text-gray-500"> {{ message.created_at }}</span>
+                                <span class="block mt-1 text-sm text-gray-500">
+                                    {{formatDate(message.created_at) }}
+                                </span>
                             </div>
                         </div>
                         <div class="w-full bg-gray-200 bg-opacity-25 p-6 border-t border-gray-200">
@@ -54,6 +56,7 @@
 <script>
     import AppLayout from '@/Layouts/AppLayout'
     import Welcome from '@/Jetstream/Welcome'
+    import moment from "moment";
 
     export default {
         components: {
@@ -71,6 +74,9 @@
                 axios.get(`api/messages/${userId}`).then(response => {
                     this.messages = response.data.messages
                 });
+            },
+            formatDate(value) {
+                return moment(value).format('DD/MM/YYY HH:mm')
             }
         },
         mounted() {
