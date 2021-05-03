@@ -11,7 +11,7 @@ class UsersController extends Controller
 {
     public function index(): JsonResponse
     {
-        $users = User::all();
+        $users = User::where('id', '<>', auth()->user()->id)->get();
 
         return response()->json([
             'users' => $users

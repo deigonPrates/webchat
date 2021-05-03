@@ -11,39 +11,10 @@
                 <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg flex" style="height: 400px;">
                     <div class="w-3/12 bg-gray-200 bg-opacity-25 border-r border-gray-200 overflow-y-scroll">
                         <ul>
-                            <li class="p-6 text-lg text-gray-600 leading-7 font-semibold border-b border-gray-200
+                            <li v-for="user in users" :key="user.id"
+                                class="p-6 text-lg text-gray-600 leading-7 font-semibold border-b border-gray-200
                                     hover:bg-gray-200 hover:bg-opacity-50 hover:cursor-pointer">
-                                <p class="flex items-center">Robson V. Leite
-                                    <span class="ml-2 h-2 w-2 bg-blue-200 rounded-full"></span>
-                                </p>
-                            </li>
-                            <li class="p-6 text-lg text-gray-600 leading-7 font-semibold border-b border-gray-200
-                                    hover:bg-gray-200 hover:bg-opacity-50 hover:cursor-pointer">
-                                <p class="flex items-center">Kaue Francisco
-                                    <span class="ml-2 h-2 w-2 bg-blue-200 rounded-full"></span>
-                                </p>
-                            </li>
-                            <li class="p-6 text-lg text-gray-600 leading-7 font-semibold border-b border-gray-200
-                                    hover:bg-gray-200 hover:bg-opacity-50 hover:cursor-pointer">
-                                <p class="flex items-center">Kaue Francisco
-                                    <span class="ml-2 h-2 w-2 bg-blue-200 rounded-full"></span>
-                                </p>
-                            </li>
-                            <li class="p-6 text-lg text-gray-600 leading-7 font-semibold border-b border-gray-200
-                                    hover:bg-gray-200 hover:bg-opacity-50 hover:cursor-pointer">
-                                <p class="flex items-center">Kaue Francisco
-                                    <span class="ml-2 h-2 w-2 bg-blue-200 rounded-full"></span>
-                                </p>
-                            </li>
-                            <li class="p-6 text-lg text-gray-600 leading-7 font-semibold border-b border-gray-200
-                                    hover:bg-gray-200 hover:bg-opacity-50 hover:cursor-pointer">
-                                <p class="flex items-center">Kaue Francisco
-                                    <span class="ml-2 h-2 w-2 bg-blue-200 rounded-full"></span>
-                                </p>
-                            </li>
-                            <li class="p-6 text-lg text-gray-600 leading-7 font-semibold border-b border-gray-200
-                                    hover:bg-gray-200 hover:bg-opacity-50 hover:cursor-pointer">
-                                <p class="flex items-center">Kaue Francisco
+                                <p class="flex items-center">{{ user.name }}
                                     <span class="ml-2 h-2 w-2 bg-blue-200 rounded-full"></span>
                                 </p>
                             </li>
@@ -59,71 +30,6 @@
                                 <span class="block mt-1 text-sm text-gray-500"> 21/10/2020 17:44</span>
                             </div>
                             <div class="w-full mb-3">
-                                <p class="inline-block p-2 rounded-md messageToMe" style="max-width: 75%">
-                                    Oi humanos!
-                                </p>
-                                <span class="block mt-1 text-sm text-gray-500"> 21/10/2020 17:44</span>
-                            </div><div class="w-full mb-3">
-                                <p class="inline-block p-2 rounded-md messageToMe" style="max-width: 75%">
-                                    Oi humanos!
-                                </p>
-                                <span class="block mt-1 text-sm text-gray-500"> 21/10/2020 17:44</span>
-                            </div><div class="w-full mb-3">
-                                <p class="inline-block p-2 rounded-md messageToMe" style="max-width: 75%">
-                                    Oi humanos!
-                                </p>
-                                <span class="block mt-1 text-sm text-gray-500"> 21/10/2020 17:44</span>
-                            </div><div class="w-full mb-3">
-                                <p class="inline-block p-2 rounded-md messageToMe" style="max-width: 75%">
-                                    Oi humanos!
-                                </p>
-                                <span class="block mt-1 text-sm text-gray-500"> 21/10/2020 17:44</span>
-                            </div><div class="w-full mb-3">
-                                <p class="inline-block p-2 rounded-md messageToMe" style="max-width: 75%">
-                                    Oi humanos!
-                                </p>
-                                <span class="block mt-1 text-sm text-gray-500"> 21/10/2020 17:44</span>
-                            </div><div class="w-full mb-3">
-                                <p class="inline-block p-2 rounded-md messageToMe" style="max-width: 75%">
-                                    Oi humanos!
-                                </p>
-                                <span class="block mt-1 text-sm text-gray-500"> 21/10/2020 17:44</span>
-                            </div><div class="w-full mb-3">
-                                <p class="inline-block p-2 rounded-md messageToMe" style="max-width: 75%">
-                                    Oi humanos!
-                                </p>
-                                <span class="block mt-1 text-sm text-gray-500"> 21/10/2020 17:44</span>
-                            </div><div class="w-full mb-3">
-                                <p class="inline-block p-2 rounded-md messageToMe" style="max-width: 75%">
-                                    Oi humanos!
-                                </p>
-                                <span class="block mt-1 text-sm text-gray-500"> 21/10/2020 17:44</span>
-                            </div><div class="w-full mb-3">
-                                <p class="inline-block p-2 rounded-md messageToMe" style="max-width: 75%">
-                                    Oi humanos!
-                                </p>
-                                <span class="block mt-1 text-sm text-gray-500"> 21/10/2020 17:44</span>
-                            </div><div class="w-full mb-3">
-                                <p class="inline-block p-2 rounded-md messageToMe" style="max-width: 75%">
-                                    Oi humanos!
-                                </p>
-                                <span class="block mt-1 text-sm text-gray-500"> 21/10/2020 17:44</span>
-                            </div><div class="w-full mb-3">
-                                <p class="inline-block p-2 rounded-md messageToMe" style="max-width: 75%">
-                                    Oi humanos!
-                                </p>
-                                <span class="block mt-1 text-sm text-gray-500"> 21/10/2020 17:44</span>
-                            </div><div class="w-full mb-3">
-                                <p class="inline-block p-2 rounded-md messageToMe" style="max-width: 75%">
-                                    Oi humanos!
-                                </p>
-                                <span class="block mt-1 text-sm text-gray-500"> 21/10/2020 17:44</span>
-                            </div><div class="w-full mb-3">
-                                <p class="inline-block p-2 rounded-md messageToMe" style="max-width: 75%">
-                                    Oi humanos!
-                                </p>
-                                <span class="block mt-1 text-sm text-gray-500"> 21/10/2020 17:44</span>
-                            </div><div class="w-full mb-3">
                                 <p class="inline-block p-2 rounded-md messageToMe" style="max-width: 75%">
                                     Oi humanos!
                                 </p>
@@ -163,7 +69,7 @@
         },
         mounted() {
             axios.get('api/users').then(response =>{
-               console.log(response)
+               this.users = response.data.users;
             });
         }
     }
