@@ -39,10 +39,11 @@
                         </div>
                         <div v-if="userActive"
                             class="w-full bg-gray-200 bg-opacity-25 p-6 border-t border-gray-200">
-                            <form action="" >
+                            <form v-on:click.prevent="sendMessage">
                                 <div class="flex rounded-md overflow-hidden border border-gray-300">
-                                    <input type="text" class="flex-1 px-4 py-2 text-sm border-0 focus:outline-none">
-                                    <button type="submit" class="bg-indigo-500  px-4 py-2 hover:bg-indigo-600 text-white">Enviar
+                                    <input v-model="message" type="text"
+                                           class="flex-1 px-4 py-2 text-sm border-0 focus:outline-none">
+                                    <button type="submit" class="bg-indigo-500 px-4 py-2 hover:bg-indigo-600 text-white">Enviar
                                     </button>
                                 </div>
                             </form>
@@ -69,7 +70,8 @@
             return {
                 users: [],
                 messages: [],
-                userActive: null
+                userActive: null,
+                message: ''
             }
         },
         methods:{
@@ -84,6 +86,17 @@
             },
             formatDate(value) {
                 return moment(value).format('DD/MM/YYY HH:mm')
+            },
+            sendMessage: function(){
+                if(this.message.length === 0){
+                    return;
+                }
+                axios.post('api/messages/store', {
+                    'content': this.message,
+                    'to': this.userActive.id
+                }).then(response => {
+                    console.log(response)
+                });
             }
         },
         mounted() {
