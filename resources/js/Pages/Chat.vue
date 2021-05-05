@@ -27,7 +27,7 @@
                         <div class="w-full p-6 flex flex-col overflow-y-scroll">
                             <div v-for="message in messages" :key="messages.id"
                                 :class="(message.from === $attrs.user.id) ? 'text-right' : ''"
-                                class="w-full mb-3">
+                                class="w-full mb-3 message">
                                 <p :class="(message.from === $attrs.user.id) ? 'messageFromMe' : 'messageToMe'"
                                     class="inline-block p-2 rounded-md" style="max-width: 75%">
                                     {{ message.content }}
@@ -75,28 +75,44 @@
             }
         },
         methods:{
-            loadMessages:function (userId) {
+            scrollToBottom:function (){
+                if(this.messages.length > 0){
+                    document.querySelectorAll('.message:last-child')[0].scrollIntoView();
+                }
+            },
+            loadMessages: async function (userId) {
                 axios.get(`api/users/${userId}`).then(response =>{
                     this.userActive = response.data.user;
                 });
 
-                axios.get(`api/messages/${userId}`).then(response => {
+                await axios.get(`api/messages/${userId}`).then(response => {
                     this.messages = response.data.messages
                 });
+
+                this.scrollToBottom();
             },
             formatDate(value) {
                 return moment(value).format('DD/MM/YYY HH:mm')
             },
-            sendMessage: function(){
+            sendMessage: async function(){
                 if(this.message.length === 0){
                     return;
                 }
-                axios.post('api/messages/store', {
+
+                await axios.post('api/messages/store', {
                     'content': this.message,
                     'to': this.userActive.id
                 }).then(response => {
-                    console.log(response)
+                    this.messages.push({
+                        'from': '1',
+                        'to': this.userActive.id,
+                        'content': this.message,
+                        'created_at': new Date().toISOString(),
+                        'updated_at': new Date().toISOString()
+                    });
                 });
+                this.message = '';
+                this.scrollToBottom();
             }
         },
         mounted() {
