@@ -17,4 +17,9 @@ class UsersController extends Controller
             'users' => $users
         ], Response::HTTP_OK);
     }
+
+    public function show(User $user): JsonResponse
+    {
+        return response()->json(['user'=>$user], Response::HTTP_OK);
+    }
 }
