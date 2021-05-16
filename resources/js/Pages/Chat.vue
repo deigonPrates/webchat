@@ -104,7 +104,7 @@
                     'to': this.userActive.id
                 }).then(response => {
                     this.messages.push({
-                        'from': '1',
+                        'from': this.$attrs.user.id,
                         'to': this.userActive.id,
                         'content': this.message,
                         'created_at': new Date().toISOString(),

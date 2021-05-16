@@ -18004,7 +18004,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   'to': this.userActive.id
                 }).then(function (response) {
                   _this2.messages.push({
-                    'from': '1',
+                    'from': _this2.$attrs.user.id,
                     'to': _this2.userActive.id,
                     'content': _this2.message,
                     'created_at': new Date().toISOString(),
