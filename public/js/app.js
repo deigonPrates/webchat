@@ -17924,6 +17924,7 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
+//import Vue from 'vue'
 
 
 
@@ -17963,9 +17964,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 });
 
               case 3:
+                this.users.filter(function (user) {
+                  if (user.id === userId) {
+                    user.notification = false;
+                  }
+                });
                 this.scrollToBottom();
 
-              case 4:
+              case 5:
               case "end":
                 return _context.stop();
             }
@@ -18054,10 +18060,17 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 3:
                 _this3.scrollToBottom();
 
-                _context3.next = 6;
+                _context3.next = 7;
                 break;
 
               case 6:
+                _this3.users.filter(function (user) {
+                  if (user.id === e.message.from) {
+                    user.notification = true;
+                  }
+                });
+
+              case 7:
               case "end":
                 return _context3.stop();
             }
@@ -21886,13 +21899,10 @@ var _hoisted_5 = {
 var _hoisted_6 = {
   "class": "flex items-center"
 };
-
-var _hoisted_7 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("span", {
+var _hoisted_7 = {
+  key: 0,
   "class": "ml-2 h-2 w-2 bg-blue-200 rounded-full"
-}, null, -1
-/* HOISTED */
-);
-
+};
 var _hoisted_8 = {
   "class": "w-9/12 flex flex-col justify-between"
 };
@@ -21934,7 +21944,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           "class": [$data.userActive && $data.userActive.id == user.id ? 'bg-gray-200 bg-opacity-50' : '', "p-6 text-lg text-gray-600 leading-7 font-semibold border-b border-gray-200\n                                    hover:bg-gray-200 hover:bg-opacity-50 hover:cursor-pointer"]
         }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("p", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(user.name) + " ", 1
         /* TEXT */
-        ), _hoisted_7])], 10
+        ), user.notification ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("span", _hoisted_7)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])], 10
         /* CLASS, PROPS */
         , ["onClick"]);
       }), 128

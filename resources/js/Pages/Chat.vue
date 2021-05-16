@@ -18,7 +18,7 @@
                                 class="p-6 text-lg text-gray-600 leading-7 font-semibold border-b border-gray-200
                                     hover:bg-gray-200 hover:bg-opacity-50 hover:cursor-pointer">
                                 <p class="flex items-center">{{ user.name }}
-                                    <span class="ml-2 h-2 w-2 bg-blue-200 rounded-full"></span>
+                                    <span v-if="user.notification" class="ml-2 h-2 w-2 bg-blue-200 rounded-full"></span>
                                 </p>
                             </li>
                         </ul>
@@ -58,6 +58,7 @@
 </template>
 
 <script>
+//import Vue from 'vue'
 import AppLayout from '@/Layouts/AppLayout'
 import Welcome from '@/Jetstream/Welcome'
 import moment from "moment";
@@ -88,6 +89,12 @@ export default {
 
             await axios.get(`api/messages/${userId}`).then(response => {
                 this.messages = response.data.messages
+            });
+
+            this.users.filter((user) => {
+                if (user.id === userId) {
+                    user.notification = false;
+                }
             });
 
             this.scrollToBottom();
@@ -121,12 +128,16 @@ export default {
             this.users = response.data.users;
         });
 
-        Echo.private(`user.${this.$attrs.user.id}`).listen('.sendMessage', async (e) =>{
-            if (this.userActive && (this.userActive.id === e.message.from)){
+        Echo.private(`user.${this.$attrs.user.id}`).listen('.sendMessage', async (e) => {
+            if (this.userActive && (this.userActive.id === e.message.from)) {
                 await this.messages.push(e.message);
                 this.scrollToBottom();
-            }else{
-
+            } else {
+                this.users.filter((user) => {
+                    if (user.id === e.message.from) {
+                        user.notification = true;
+                    }
+                });
             }
         });
     }
