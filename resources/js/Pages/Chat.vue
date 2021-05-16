@@ -26,10 +26,10 @@
                     <div class="w-9/12 flex flex-col justify-between">
                         <div class="w-full p-6 flex flex-col overflow-y-scroll">
                             <div v-for="message in messages" :key="messages.id"
-                                :class="(message.from === $attrs.user.id) ? 'text-right' : ''"
-                                class="w-full mb-3 message">
+                                 :class="(message.from === $attrs.user.id) ? 'text-right' : ''"
+                                 class="w-full mb-3 message">
                                 <p :class="(message.from === $attrs.user.id) ? 'messageFromMe' : 'messageToMe'"
-                                    class="inline-block p-2 rounded-md" style="max-width: 75%">
+                                   class="inline-block p-2 rounded-md" style="max-width: 75%">
                                     {{ message.content }}
                                 </p>
                                 <span class="block mt-1 text-sm text-gray-500">
@@ -38,12 +38,13 @@
                             </div>
                         </div>
                         <div v-if="userActive"
-                            class="w-full bg-gray-200 bg-opacity-25 p-6 border-t border-gray-200">
+                             class="w-full bg-gray-200 bg-opacity-25 p-6 border-t border-gray-200">
                             <form v-on:click.prevent="sendMessage">
                                 <div class="flex rounded-md overflow-hidden border border-gray-300">
                                     <input v-model="message" type="text"
                                            class="flex-1 px-4 py-2 text-sm border-0 focus:outline-none">
-                                    <button type="submit" class="bg-indigo-500 px-4 py-2 hover:bg-indigo-600 text-white">Enviar
+                                    <button type="submit"
+                                            class="bg-indigo-500 px-4 py-2 hover:bg-indigo-600 text-white">Enviar
                                     </button>
                                 </div>
                             </form>
@@ -57,69 +58,73 @@
 </template>
 
 <script>
-    import AppLayout from '@/Layouts/AppLayout'
-    import Welcome from '@/Jetstream/Welcome'
-    import moment from "moment";
+import AppLayout from '@/Layouts/AppLayout'
+import Welcome from '@/Jetstream/Welcome'
+import moment from "moment";
 
-    export default {
-        components: {
-            AppLayout,
-            Welcome,
-        },
-        data(){
-            return {
-                users: [],
-                messages: [],
-                userActive: null,
-                message: ''
-            }
-        },
-        methods:{
-            scrollToBottom:function (){
-                if(this.messages.length > 0){
-                    document.querySelectorAll('.message:last-child')[0].scrollIntoView();
-                }
-            },
-            loadMessages: async function (userId) {
-                axios.get(`api/users/${userId}`).then(response =>{
-                    this.userActive = response.data.user;
-                });
-
-                await axios.get(`api/messages/${userId}`).then(response => {
-                    this.messages = response.data.messages
-                });
-
-                this.scrollToBottom();
-            },
-            formatDate(value) {
-                return moment(value).format('DD/MM/YYY HH:mm')
-            },
-            sendMessage: async function(){
-                if(this.message.length === 0){
-                    return;
-                }
-
-                await axios.post('api/messages/store', {
-                    'content': this.message,
-                    'to': this.userActive.id
-                }).then(response => {
-                    this.messages.push({
-                        'from': this.$attrs.user.id,
-                        'to': this.userActive.id,
-                        'content': this.message,
-                        'created_at': new Date().toISOString(),
-                        'updated_at': new Date().toISOString()
-                    });
-                });
-                this.message = '';
-                this.scrollToBottom();
-            }
-        },
-        mounted() {
-            axios.get('api/users').then(response =>{
-               this.users = response.data.users;
-            });
+export default {
+    components: {
+        AppLayout,
+        Welcome,
+    },
+    data() {
+        return {
+            users: [],
+            messages: [],
+            userActive: null,
+            message: ''
         }
+    },
+    methods: {
+        scrollToBottom: function () {
+            if (this.messages.length > 0) {
+                document.querySelectorAll('.message:last-child')[0].scrollIntoView();
+            }
+        },
+        loadMessages: async function (userId) {
+            axios.get(`api/users/${userId}`).then(response => {
+                this.userActive = response.data.user;
+            });
+
+            await axios.get(`api/messages/${userId}`).then(response => {
+                this.messages = response.data.messages
+            });
+
+            this.scrollToBottom();
+        },
+        formatDate(value) {
+            return moment(value).format('DD/MM/YYY HH:mm')
+        },
+        sendMessage: async function () {
+            if (this.message.length === 0) {
+                return;
+            }
+
+            await axios.post('api/messages/store', {
+                'content': this.message,
+                'to': this.userActive.id
+            }).then(response => {
+                this.messages.push({
+                    'from': this.$attrs.user.id,
+                    'to': this.userActive.id,
+                    'content': this.message,
+                    'created_at': new Date().toISOString(),
+                    'updated_at': new Date().toISOString()
+                });
+            });
+            this.message = '';
+            this.scrollToBottom();
+        }
+    },
+    mounted() {
+        axios.get('api/users').then(response => {
+            this.users = response.data.users;
+        });
+
+        Echo.private(`user.${this.$attrs.user.id}`).listen('.sendMessage', (e) =>{
+            console.log(e);
+        });
     }
+}
 </script>
 

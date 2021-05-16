@@ -18037,6 +18037,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     axios.get('api/users').then(function (response) {
       _this3.users = response.data.users;
     });
+    Echo["private"]("user.".concat(this.$attrs.user.id)).listen('.sendMessage', function (e) {
+      console.log(e);
+    });
   }
 });
 
@@ -23467,7 +23470,7 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 window.Pusher = __webpack_require__(/*! pusher-js */ "./node_modules/pusher-js/dist/web/pusher.js");
 window.Echo = new laravel_echo__WEBPACK_IMPORTED_MODULE_0__.default({
   broadcaster: 'pusher',
-  key: "",
+  key: "myappkey",
   wsHost: window.location.hostname,
   wsPort: 6001,
   cluster: "mt1",
