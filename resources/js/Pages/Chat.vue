@@ -121,8 +121,13 @@ export default {
             this.users = response.data.users;
         });
 
-        Echo.private(`user.${this.$attrs.user.id}`).listen('.sendMessage', (e) =>{
-            console.log(e);
+        Echo.private(`user.${this.$attrs.user.id}`).listen('.sendMessage', async (e) =>{
+            if (this.userActive && (this.userActive.id === e.message.from)){
+                await this.messages.push(e.message);
+                this.scrollToBottom();
+            }else{
+
+            }
         });
     }
 }
